@@ -1,0 +1,163 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+  transition: background-color 100000s;
+  // -webkit-text-fill-color: #fff !important;
+}
+.t-form__row {
+  position: relative;
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+  &.flex {
+    display: flex;
+    flex-direction: column;
+  }
+  &.thick-button {
+    .button {
+      padding: 1rem;
+    }
+  }
+}
+.t-form-wrapper {
+  width: 400px;
+  max-width: 100%;
+  position: relative;
+}
+.t-form__input {
+  background-color: transparent;
+  border-bottom: 1px solid #fff;
+  display: block;
+  width: 100%;
+  color: #fff;
+  outline: none;
+  transition: .2s ease-in-out all;
+  padding: .75rem .25rem;
+  border-radius: 0;
+  &:focus,
+  &.not-empty {
+    border-bottom: 1px solid #4D4D4D;
+    + label {
+      top: -14px;
+      font-size: 14px;
+      color: #4D4D4D;
+    }
+  }
+}
+.t-form__input-label {
+  position: absolute;
+  color: #fff;
+  font-size: 16px;
+  top: -6px;
+  left: .25rem;
+  transition: .2s ease-in-out all;
+}
+.t-form__sup-link {
+  text-align: center;
+  margin-top: 2rem;
+  text-decoration: none;
+  color: #4C4C4C;
+  cursor: pointer;
+}
+.button--social {
+  position: relative;
+  display: block;
+  width: 100%;
+  box-shadow: none;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 1rem;
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
+.button--social-facebook {
+  background-color: #4267B2;
+  color: #fff;
+  .form-social-logo {
+    filter: brightness(0) invert(1);
+  }
+}
+.button--social-google {
+  background-color: #fff;
+  color: #929BAC;
+}
+.form-social-logo {
+  display: block;
+  position: absolute;
+  height: 25px;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.form--loading-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% + 2rem);
+  height: calc(100% + 2rem);
+  background-color: rgba(16, 16, 24, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.t-form:not(.is-loading) {
+  &+.form--loading-overlay {
+    display: none;
+  }
+}
+.t-form:not(.is-loading) {
+  &+.form--loading-overlay {
+    display: none;
+  }
+}
+.status-check {
+  margin-top: .5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.status-check {
+  font-size: 14px;
+  .game__loading-dots {
+    height: 16px;
+  }
+  &.is-ok {
+    color: #48c774;
+  }
+  &.is-taken {
+    color: #f14668;
+  }
+}
+ul.errors {
+  color: $red;
+  font-size: 12px;
+  padding-left: 2rem;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+.error {
+  .t-form__input {
+    border-bottom-color: $red;
+    color: $red;
+  }
+  .t-form__input-label {
+    color: $red;
+  }
+  .t-form__input:focus + label, .t-form__input.not-empty + label {
+    color: $red;
+  }
+}
+
+@media (max-width: 767px) {
+  .form--loading-overlay {
+    height: 110vh;
+    width: 110vw;
+  }
+  .auth__inner-col {
+    overflow: hidden;
+  }
+}

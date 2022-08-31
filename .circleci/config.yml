@@ -1,0 +1,57 @@
+version: 2.1
+
+jobs:
+  deploy:
+    docker:
+      - image: circleci/node:12
+    parameters:
+      stage:
+        type: string
+    steps:
+      - checkout
+      - run:
+          name: Install
+          command: npm ci
+      - run:
+          name: Add AWS credentials
+          command: mkdir ~/.aws && echo -e "[client-tournament-<< parameters.stage >>]\naws_access_key_id=$AWS_ACCESS_KEY_ID\naws_secret_access_key=$AWS_SECRET_ACCESS_KEY\n" > ~/.aws/credentials
+      - run:
+          name: Deploy
+          command: npm run deploy:<< parameters.stage >>
+
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      # DEPLOY dev
+      - deploy:
+          name: deploy-dev
+          filters:
+            branches:
+              only: dev
+          context: client-tournament-dev
+          stage: dev
+      # DEPLOY uat
+      - deploy:
+          name: deploy-uat
+          filters:
+            branches:
+              only: uat
+          context: client-tournament-uat
+          stage: uat
+      # DEPLOY qa
+      - deploy:
+          name: deploy-qa
+          filters:
+            branches:
+              only: qa
+          context: client-tournament-qa
+          stage: qa
+      # DEPLOY prod
+      - deploy:
+          name: deploy-prod
+          filters:
+            branches:
+              only: master
+          context: client-tournament-prod
+          stage: prod

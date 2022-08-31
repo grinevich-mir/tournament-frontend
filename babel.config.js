@@ -1,0 +1,14 @@
+module.exports = {
+  presets: [
+    '@vue/cli-plugin-babel/preset',
+  ],
+  env: {
+    production: {
+      plugins: [
+        'transform-remove-console',
+        'transform-object-rest-spread',
+        'transform-es2015-destructuring',
+      ],
+    },
+  },
+};
